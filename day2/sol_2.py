@@ -24,12 +24,12 @@ score = 0
 
 for line in lines:
     his_move, xyz = line.split(' ')
-    disired_outcome = xyz_to_outcome[xyz]
+    desired_outcome = xyz_to_outcome[xyz]
     his_move_int = move_to_int[his_move]
-    your_move_int = find_desired_move(disired_outcome, his_move_int)
-    if disired_outcome == 'win':
+    your_move_int = find_desired_move(desired_outcome, his_move_int)
+    if desired_outcome == 'win':
         score += 6 
-    elif disired_outcome == 'draw':
+    elif desired_outcome == 'draw':
         score += 3 
     score += your_move_int + 1
 

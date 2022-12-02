@@ -26,10 +26,10 @@ for line in lines:
     his_move, strategic_choice = line.split(' ')
     your_move_int = move_to_int[xyz_to_abc[strategic_choice]]
     his_move_int = move_to_int[his_move]
-    outocme = find_outcome(your_move_int, his_move_int)
-    if outocme == 'win':
+    outcome = find_outcome(your_move_int, his_move_int)
+    if outcome == 'win':
         score += 6 
-    elif outocme == 'draw':
+    elif outcome == 'draw':
         score += 3 
     score += your_move_int + 1
 
