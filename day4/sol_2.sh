@@ -6,10 +6,7 @@ do
   IFS=',' read -ra ELVES <<< "$LINE"
   IFS='-' read -ra ELF_1 <<< "${ELVES[0]}"
   IFS='-' read -ra ELF_2 <<< "${ELVES[1]}"
-  if ([ "${ELF_2[0]}" -ge "${ELF_1[0]}" ] && [ "${ELF_2[0]}" -le "${ELF_1[1]}" ]) ||
-     ([ "${ELF_2[1]}" -ge "${ELF_1[0]}" ] && [ "${ELF_2[1]}" -le "${ELF_1[1]}" ]) ||
-     ([ "${ELF_1[0]}" -ge "${ELF_2[0]}" ] && [ "${ELF_1[0]}" -le "${ELF_2[1]}" ]) ||
-     ([ "${ELF_1[1]}" -ge "${ELF_2[0]}" ] && [ "${ELF_1[1]}" -le "${ELF_2[1]}" ])
+  if [ "${ELF_1[0]}" -le "${ELF_2[1]}" ] && [ "${ELF_1[1]}" -ge "${ELF_2[0]}" ]
   then
     ((TOTAL+=1))
   fi
