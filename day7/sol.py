@@ -4,8 +4,6 @@ pwd = []
 sizes = {}
 
 for command in commands:
-    if not command:
-        continue
     lines = command.strip().split('\n')
     if lines[0].startswith('cd'):
         target = lines[0].split(' ')[1]
@@ -22,4 +20,8 @@ for command in commands:
                     sizes[key] = size + sizes.get(key, 0)                
 
 
+print('part 1: ', end="")
 print(sum(filter(lambda s: s < 100000, sizes.values())))
+
+print('part 2: ', end="")
+print(min(filter(lambda s: s >= 30000000-(70000000-sizes['/']), sizes.values())))
