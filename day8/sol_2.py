@@ -1,18 +1,7 @@
 data = open('input.txt').read().strip().split('\n')
 
-rows = []
-for row in data:
-    rows.append([int(c) for c in row])
-
-
-columns = []
-for i in range(len(rows)):
-    columns.append([])
-
-for row in rows:
-    for i in range(len(row)):
-        columns[i].append(row[i])
-
+rows = [[int(c) for c in row] for row in data]
+columns = list(zip(*rows))
 
 def line_of_sight_length(trees, height):
     if not trees:
