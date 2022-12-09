@@ -1,37 +1,21 @@
-from time import sleep
-import os
+import math
+
 lines = open('input.txt').read().strip().split('\n')
 
 have_been = set()
 
+def magic(x):
+    # 🪄
+    if x == 0:
+        return 0
+    return math.copysign(1, x) 
+
 def move_tail(head, tail):
-    # this is garbage 🗑️
+    # less garbage ✨
     dist_x = head[0] - tail[0]
     dist_y = head[1] - tail[1]
-    if dist_x > 1:
-        tail = (tail[0]+1, tail[1])
-        if dist_y > 0:
-            tail = (tail[0], tail[1]+1)
-        if dist_y < 0:
-            tail = (tail[0], tail[1]-1)
-    elif dist_x < -1:
-        tail = (tail[0]-1, tail[1])
-        if dist_y > 0:
-            tail = (tail[0], tail[1]+1)
-        if dist_y < 0:
-            tail = (tail[0], tail[1]-1)
-    elif dist_y > 1:
-        tail = (tail[0], tail[1]+1)
-        if dist_x > 0:
-            tail = (tail[0]+1, tail[1])
-        if dist_x < 0:
-            tail = (tail[0]-1, tail[1])
-    elif dist_y < -1:
-        tail = (tail[0], tail[1]-1)
-        if dist_x > 0:
-            tail = (tail[0]+1, tail[1])
-        if dist_x < 0:
-            tail = (tail[0]-1, tail[1])
+    if abs(dist_x) > 1 or abs(dist_y) > 1:
+        return (tail[0] + magic(dist_x), tail[1] + magic(dist_y))
     return tail
 
 snake = [(0,0)] * 10
@@ -51,23 +35,5 @@ for line in lines:
             snake[i] = move_tail(snake[i-1], snake[i])
             if i == len(snake)-1:
                 have_been.add(snake[i])
-        #os.system('clear')
-        #for y in reversed(range(-20,20)):
-        #    for x in range(-20,20):
-        #        for i, tail in enumerate(snake):
-        #            if (x,y) == tail:
-        #                print(i, end='')
-        #                break
-        #        else:
-        #            print('.', end='')
-        #    print()
 
-#os.system('clear')
-#for y in reversed(range(-20,20)):
-#    for x in range(-20,20):
-#        if (x,y) in have_been:
-#            print('#', end='')
-#        else:
-#            print('.', end='')
-#    print()
 print(len(have_been))
