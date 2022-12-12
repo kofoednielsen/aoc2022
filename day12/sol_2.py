@@ -6,16 +6,7 @@ sys.setrecursionlimit(100000000)
 
 grid = open("input.txt").read().strip().split("\n")
 
-optimal_grid = [[999 for _ in range(len(grid[0]))] for c in range(len(grid))]
 
-
-def sum_optimal_grid():
-    visited = len(list(filter(lambda n: n != 999, chain(*optimal_grid))))
-    print(f"{visited} {visited / 140*41} %")
-
-
-start = (0, 0)
-end = (0, 0)
 for y, row in enumerate(grid):
     if "S" in row:
         start = (row.index("S"), y)
@@ -24,9 +15,12 @@ for y, row in enumerate(grid):
         end = (row.index("E"), y)
         grid[y] = grid[y].replace("E", "z")
 
-print(start)
-print(end)
 
+a_fields = []
+for y in range(len(grid)):
+    for x in range(len(grid[0])):
+        if grid[y][x] == 'a':
+            a_fields.append((x,y)) 
 
 def find_end(position, steps):
     directions = [
@@ -72,10 +66,12 @@ def find_end(position, steps):
         ]
     )
 
-
-[print(r) for r in grid]
-print(find_end(start, 0))
-sum_optimal_grid()
+distances = []
+for i, a in enumerate(a_fields):
+    print(f"{i/len(a_fields)} %")
+    optimal_grid = [[999 for _ in range(len(grid[0]))] for c in range(len(grid))]
+    distances.append(find_end(a, 0))
+print(min(distances))
 
 # for y, r in enumerate(optimal_grid):
 #     for x, c in enumerate(r):
